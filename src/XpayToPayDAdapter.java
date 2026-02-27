@@ -42,8 +42,11 @@ public class XpayToPayDAdapter implements PayD {
 
     @Override
     public void setCardExpMonthYear(String cardExpMonthYear) {
-        xpay.setCardExpMonth(cardExpMonthYear.substring(0, 2));
-        xpay.setCardExpYear(cardExpMonthYear.substring(3, 2));
+        String[] parts = cardExpMonthYear.split("/");
+        if (parts.length == 2) {
+            xpay.setCardExpMonth(parts[0]);
+            xpay.setCardExpYear(parts[1]);
+        }
     }
 
     @Override
@@ -53,6 +56,6 @@ public class XpayToPayDAdapter implements PayD {
 
     @Override
     public void setTotalAmount(Double totalAmount) {
-
+        xpay.setAmount(totalAmount);
     }
 }
